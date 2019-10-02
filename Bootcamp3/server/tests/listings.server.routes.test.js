@@ -125,13 +125,17 @@ describe('Listings CRUD tests', function() {
     agent.post('/api/listings')
       .send(listing2)
       .expect(200)
+      //.send(res.body.coordinates.latitude) //FIXME: remove
       .end(function(err, res) {
         should.not.exist(err);
         should.exist(res.body._id);
+        console.log(res.body);
         res.body.name.should.equal('Dr. Gardner-McCunes Office');
         res.body.code.should.equal('GMC');
         res.body.address.should.equal('432 Newell Dr, Gainesville, FL 32611');
         res.body.coordinates.latitude.should.equal(28.75054);
+        //console.log('------------------------------------');
+        //console.log(res.body.coordinates.latitude);
         res.body.coordinates.longitude.should.equal(-82.5001);
         id2 = res.body._id;
         done();
